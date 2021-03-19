@@ -83,11 +83,11 @@ animate__animated animate__rollIn
 @media only screen and (max-width : 768px) {
 
 	.landing {
-  font-size:2rem;
-  left:17%;	
+  font-size:1rem;
+  left:12%;	
 	}
     .landing h1{
-  font-size:3rem;
+  font-size:2rem;
 }
 
 }
@@ -161,10 +161,10 @@ animate__animated animate__rollIn
                         <a href="#" style="float:right;font-size:12px;">Forgot password?</a>
                         <input type="password" name="password" class="form-control form-control-sm" id="exampleInputPassword1">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign in</button>
                     
                     <div class="sign-up">
-                        Don't have an account? <a href="{% url 'register_attempt' %}">Create One</a>
+                        Don't have an account? <a style="color:blue;text-decoration:none;" href="{% url 'register_attempt' %}">Create One</a>
                     </div>
                 </form>
             </div>

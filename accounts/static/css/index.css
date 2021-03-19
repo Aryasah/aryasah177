@@ -62,3 +62,9 @@ main .overlay {
   }
 }
 
+.card-text{
+  font-family: 'Lora',cursive;
+}
+.card-title{
+  font-weight: bold;
+}
