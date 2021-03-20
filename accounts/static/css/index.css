@@ -4,15 +4,15 @@
   padding: 0;
   
 }
-.carousel-item, .img-fluid {
+.carousel-item img{
 width:100%;
 }
-@media(max-width:767px)
+@media only screen and (max-width:767px)
 {
   .jumbotron{
     font-size: 2rem;
   }
-  .dop 
+  .dop,.dopp
   {
     font-size:1.3rem;
   }
