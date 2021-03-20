@@ -12,6 +12,10 @@ width:100%;
   .jumbotron{
     font-size: 2rem;
   }
+  .dop 
+  {
+    font-size:1.3rem;
+  }
 }
 main {
   position: relative;

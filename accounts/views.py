@@ -39,29 +39,37 @@ def login_attempt(request):
 
 
 def register_attempt(request):
-
-    if request.method == 'POST':
+    print('loko')
+    if request.method =="POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(password)
+        print('mkokm')
+        
 
         try:
             if User.objects.filter(username = username).first():
                 messages.error(request, 'Username is taken.')
                 return redirect('/register')
+                print('mkokm6')
+
 
             if User.objects.filter(email = email).first():
                 messages.error(request, 'Email is taken.')
                 return redirect('/register')
+                print('mkokm8')
+
             
             user_obj = User(username = username , email = email)
             user_obj.set_password(password)
             user_obj.save()
+            print('mkokm9')
             auth_token = str(uuid.uuid4())
             profile_obj = Profile.objects.create(user = user_obj , auth_token = auth_token)
             profile_obj.save()
-            send_mail_after_registration(email , auth_token)
+            print('mkokm11')
+            send_mail_after_registration(email,auth_token)
+            print('mkokm10')
             return redirect('/token')
 
         except Exception as e:
@@ -91,7 +99,7 @@ def verify(request , auth_token):
             profile_obj.is_verified = True
             profile_obj.save()
             messages.success(request, 'Your account has been verified.')
-            return redirect('/accounts/login')
+            return redirect('/accounts/success')
         else:
             return redirect('/error')
     except Exception as e:
@@ -114,15 +122,20 @@ def about(request):
     return render(request, 'accounts/about.html') 
 
 def contact(request):
+    print('jh')
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         desc = request.POST.get('desc')
-        contact = Contact(name=name, email=email, phone=phone, desc=desc, date = datetime.today())
-        contact.save()
         messages.success(request, 'Your message has been sent!')
-    return render(request, 'accounts/contact.html')
+        subject = 'New Contact list '
+        message = f'{name}{email}{phone}{desc}'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['aryasah30@gmail.com']
+        send_mail(subject, message , email_from ,recipient_list ) 
+        print(message)
+        return render(request, 'accounts/contact.html')
 
 def logoutUser(request):
     logout(request)
@@ -134,9 +147,12 @@ def logoutUser(request):
 
 
 def send_mail_after_registration(email , token):
-    subject = 'Your accounts need to be verified'
-    message = f'Hi paste the link to verify your account http://aryasah17.herokuapp.com/verify/{token}'
+    
+    subject = ' Thank you for registering with us Your accounts need to be verified '
+    message = f'Hi  paste the link to verify your account http://aryasah17.herokuapp.com/verify/{token}'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
+   
     send_mail(subject, message , email_from ,recipient_list )
     
+    return redirect('/token')
