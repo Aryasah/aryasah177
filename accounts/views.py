@@ -69,7 +69,6 @@ def register_attempt(request):
             profile_obj.save()
             print('mkokm11')
             messages.error(request, 'Have patience New email verification is down for 24hrs by g-services ,regards Arya Sah')
-            return redirect('/success')
             send_mail_after_registration(email,auth_token)
             print('mkokm10')
             return redirect('/token')
@@ -101,7 +100,7 @@ def verify(request , auth_token):
             profile_obj.is_verified = True
             profile_obj.save()
             messages.success(request, 'Your account has been verified.')
-            return redirect('/accounts/success')
+            return redirect('/success')
         else:
             return redirect('/error')
     except Exception as e:
@@ -131,12 +130,12 @@ def contact(request):
         phone = request.POST.get('phone')
         desc = request.POST.get('desc')
         messages.success(request, 'Your message has been sent!')
-        # subject = 'New Contact list '
-        # message = f'{name}{email}{phone}{desc}'
-        # email_from = settings.EMAIL_HOST_USER
-        # recipient_list = ['aryasah30@gmail.com']
-        # send_mail(subject, message , email_from ,recipient_list ) 
-        # print(message)
+        subject = 'New Contact list '
+        message = f'{name}{email}{phone}{desc}'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['aryasah30@gmail.com']
+        send_mail(subject, message , email_from ,recipient_list ) 
+        print(message)
     return render(request, 'accounts/contact.html')
 
 def logoutUser(request):
