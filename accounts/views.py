@@ -68,7 +68,7 @@ def register_attempt(request):
             profile_obj = Profile.objects.create(user = user_obj , auth_token = auth_token)
             profile_obj.save()
             print('mkokm11')
-            messages.error(request, 'Have patience New email verification is down for 24hrs by g-services ,regards Arya Sah')
+            # messages.error(request, ' Have patience New email verification is down for 24hrs by g-services ,regards Arya Sah')
             send_mail_after_registration(email,auth_token)
             print('mkokm10')
             return redirect('/token')
